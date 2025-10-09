@@ -6,7 +6,7 @@ ENV PYTHONUNBUFFERED=1
 ENV PORT=8888
 ENV POETRY_VERSION=1.8.3
 # Jika pakai SOCKS5 proxy, uncomment dan sesuaikan
-# ENV all_proxy="socks5://127.0.0.1:1080"
+ENV all_proxy="socks5://dknebqij:phd93xglfe0y@45.38.111.112:6027"
 
 WORKDIR /mediaflow_proxy
 
@@ -34,7 +34,7 @@ RUN poetry config virtualenvs.in-project true \
 # --- Copy project files ---
 COPY --chown=mediaflow_proxy:mediaflow_proxy . /mediaflow_proxy
 
-EXPOSE 8888
+EXPOSE 8080
 
 # --- Run Gunicorn via Poetry ---
-CMD ["sh", "-c", "exec poetry run gunicorn mediaflow_proxy.main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8888 --timeout 120 --max-requests 500 --max-requests-jitter 200 --access-logfile - --error-logfile - --log-level info --forwarded-allow-ips \"${FORWARDED_ALLOW_IPS:-127.0.0.1}\""]
+CMD ["sh", "-c", "exec poetry run gunicorn mediaflow_proxy.main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8080 --timeout 120 --max-requests 500 --max-requests-jitter 200 --access-logfile - --error-logfile - --log-level info --forwarded-allow-ips \"${FORWARDED_ALLOW_IPS:-127.0.0.1}\""]
