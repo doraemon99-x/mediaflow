@@ -6,11 +6,6 @@ ENV PYTHONUNBUFFERED=1
 ENV PORT=8080
 ENV POETRY_VERSION=1.8.3
 
-# --- Proxy saat build ---
-ENV http_proxy="http://dknebqij:phd93xglfe0y@45.38.111.112:6027"
-ENV https_proxy="http://dknebqij:phd93xglfe0y@45.38.111.112:6027"
-ENV all_proxy="http://dknebqij:phd93xglfe0y@45.38.111.112:6027"
-
 # --- Install dependencies ---
 USER root
 RUN apt-get update && apt-get install -y curl build-essential \
@@ -33,9 +28,9 @@ RUN poetry config virtualenvs.in-project true \
 # --- Copy seluruh file project ---
 COPY --chown=mediaflow_proxy:mediaflow_proxy . /mediaflow_proxy
 
-# --- Runtime proxy config (opsional, bisa juga set dari luar) ---
-# ENV PROXY_URL="http://dknebqij:phd93xglfe0y@45.38.111.112:6027"
-# ENV ALL_PROXY=true
+# --- Runtime proxy config (dapat diaktifkan kalau mau hardcode proxy) ---
+ENV PROXY_URL="http://dknebqij:phd93xglfe0y@45.38.111.112:6027"
+ENV ALL_PROXY=true
 
 EXPOSE 8080
 
