@@ -5,8 +5,9 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV PORT=8080
 ENV POETRY_VERSION=1.8.3
-# Jika pakai SOCKS5 proxy, uncomment dan sesuaikan
-ENV all_proxy="http://dknebqij:phd93xglfe0y@45.38.111.112:6027"
+ENV PROXY_URL="http://dknebqij:phd93xglfe0y@45.38.111.112:6027"
+ENV ALL_PROXY=true
+
 
 WORKDIR /mediaflow_proxy
 
